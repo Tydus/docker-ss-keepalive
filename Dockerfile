@@ -3,6 +3,7 @@ FROM kamikat/shadowsocks-libev:2.5.6-alpine
 ENV LOCAL_PORT=1080
 ENV INTERVAL=3600
 ENV TEST_URL=http://ifconfig.co
+ENV EXTRA_CURL=
 
 USER root
 
@@ -21,6 +22,6 @@ CMD (ss-local -s $SERVER_ADDR \
 sleep 3; \
 while true; do curl -s \
     --socks5-hostname 127.0.0.1:$LOCAL_PORT \
-    "$TEST_URL"; \
+    "$TEST_URL" $EXTRA_CURL; \
     sleep $INTERVAL; \
 done
